@@ -20,15 +20,18 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
-    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation group: 'com.codeborne', name: 'selenide', version: '5.22.2'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '3.0.0'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.2'
+
 }
 
 test {
