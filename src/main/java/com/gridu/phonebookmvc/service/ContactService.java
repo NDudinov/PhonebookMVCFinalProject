@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface ContactService {
 
-    public Contact save(String name, String phone);
+    public Contact save(Contact contact);
 
     public List<Contact> findAll();
 
     public Contact findByName(String contactName) throws ContactNotFoundException;
 
-    public Contact updateContact(String contactName, String addPhone) throws ContactNotFoundException;
+    public Contact updateContact(String contactName, String newPhone) throws ContactNotFoundException;
 
     public void deleteContact(String contactName) throws ContactNotFoundException;
 }

@@ -9,10 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 import java.util.List;
 
 @Service
-public class ContactServiceImpl implements ContactService{
+public class ContactServiceImpl implements ContactService {
 
     @Autowired
     private ContactRepository contactRepository;
@@ -20,56 +22,37 @@ public class ContactServiceImpl implements ContactService{
     private static final Logger LOG = LoggerFactory.getLogger(ContactRestController.class);
 
     @Override
-    public Contact save(String name, String phone) {
+    public Contact save(Contact contact) {
         LOG.info("SAVE NEW CONTACT POST");
-        Contact newContact = new Contact();
-        newContact.setName(name);
-        newContact.setPhone(phone);
-        contactRepository.save(newContact);
-        return newContact;
+        contactRepository.save(contact);
+        return contact;
     }
 
     @Override
     public List<Contact> findAll() {
         LOG.info("FIND ALL CONTACTS GET");
-        Iterable<Contact> contactsIterator = contactRepository.findAll();
-        List<Contact> contactList = null;
-        contactsIterator.forEach(contact -> contactList.add(contact));
-        return contactList;
+        return contactRepository.findAll();
     }
 
     @Override
     public Contact findByName(String contactName) throws ContactNotFoundException {
         LOG.info("FIND ONE CONTACT BY NAME "+ contactName);
-        throwExceptionIfContactNotFound(contactName);
-        return contactRepository.findByName(contactName);
-
+        return contactRepository.findByContactName(contactName).orElseThrow(() -> new ContactNotFoundException(contactName));
     }
 
     @Override
-    public Contact updateContact(String contactName, String addPhone) throws ContactNotFoundException {
-        LOG.info("UPDATE A CONTACT PUT "+ contactName);
-        throwExceptionIfContactNotFound(contactName);
-        Contact contact = contactRepository.findByName(contactName);
-        contact.setPhone(String.format("%s|%s", contact.getPhone(),addPhone));
+    public Contact updateContact(String contactName, String newPhone) throws ContactNotFoundException {
+        LOG.info("UPDATE A CONTACT PUT " + contactName);
+        Contact contact = findByName(contactName);
+        contact.setPhone(String.format("%s | %s", contact.getPhone(), newPhone));
         contactRepository.save(contact);
         return contact;
     }
 
     @Override
     public void deleteContact(String contactName) throws ContactNotFoundException {
-        LOG.info("DELETE A CONTACT DELETE "+ contactName);
-        throwExceptionIfContactNotFound(contactName);
-        Contact contact = contactRepository.findByName(contactName);
+        LOG.info("DELETE A CONTACT " + contactName);
+        Contact contact = findByName(contactName);
         contactRepository.delete(contact);
-        contactRepository.saveAll(contactRepository.findAll());
-    }
-
-
-
-    private void throwExceptionIfContactNotFound(String contactName) throws ContactNotFoundException{
-        if (contactRepository.findByName(contactName).equals(null)) {
-            throw new ContactNotFoundException(contactName);
-        }
     }
 }

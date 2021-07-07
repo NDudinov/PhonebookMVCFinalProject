@@ -1,31 +1,23 @@
 package com.gridu.phonebookmvc.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
+import javax.validation.constraints.NotBlank;
 
-@Data
+
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "contact")
+@AllArgsConstructor
+@Data
 public class Contact {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @NonNull
-    @Column(name = "id")
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    @NonNull
-    @Column(name = "first_name")
-    private String name;
+    private String contactName;
 
-    @NonNull
-    @Column(name = "phone")
     private String phone;
 }

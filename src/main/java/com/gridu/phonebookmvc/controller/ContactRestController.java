@@ -5,7 +5,9 @@ import com.gridu.phonebookmvc.exception.ContactNotFoundException;
 import com.gridu.phonebookmvc.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -18,37 +20,53 @@ public class ContactRestController {
 
     @PostMapping(path = "/contacts/add")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public @ResponseBody
-    Contact addContact(@RequestParam String name,
-                       @RequestParam String phone) {
-        return contactService.save(name, phone);
+    @ResponseBody
+    public Contact addContact(@RequestBody Contact contact) {
+        return contactService.save(contact);
     }
 
     @GetMapping(path = "/contacts")
     @ResponseStatus(code = HttpStatus.FOUND)
-    public @ResponseBody List<Contact> getAllContacts() {
+    @ResponseBody
+    public List<Contact> getAllContacts() {
         return contactService.findAll();
     }
 
-    @GetMapping(path = "/contacts/{name}")
+    @GetMapping(path = "/contacts/{contactName}")
     @ResponseStatus(code = HttpStatus.FOUND)
-    public @ResponseBody
-    Contact getContactByName(@RequestParam(name = "name") String contactName) throws ContactNotFoundException {
-        return contactService.findByName(contactName);
+    @ResponseBody
+    public Contact getContactByName(@PathVariable("contactName") String contactName) {
+        try {
+            return contactService.findByName(contactName);
+        } catch (ContactNotFoundException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, String.format("Contact %s was not fount", contactName));
+        }
     }
 
-    @PutMapping(path = "/contacts/{name}")
+    @PutMapping(path = "/contacts/{contactName}")
     @ResponseStatus(code = HttpStatus.ACCEPTED)
-    public @ResponseBody
-    Contact updateContactByName(@RequestParam(name = "name")String contactName,
-                                @RequestParam String addPhone) throws ContactNotFoundException {
-        return contactService.updateContact(contactName, addPhone);
+    @ResponseBody
+    public Contact updateContactByName(@PathVariable("contactName") String contactName,
+                                       @RequestParam(name = "newPhone") String newPhone) {
+        try {
+            return contactService.updateContact(contactName, newPhone);
+        } catch (ContactNotFoundException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, String.format("Contact %s was not fount", contactName));
+        }
     }
 
-    @DeleteMapping(path = "/contacts/{name}")
+    @DeleteMapping(path = "/contacts/{contactName}")
     @ResponseStatus(code = HttpStatus.OK)
-    public @ResponseBody List<Contact> deleteContact(@RequestParam(name = "name") String contactName) throws ContactNotFoundException {
-        contactService.deleteContact(contactName);
-        return contactService.findAll();
+    @ResponseBody
+    public ResponseEntity deleteContact(@PathVariable("contactName") String contactName) {
+        try {
+            contactService.deleteContact(contactName);
+        } catch (ContactNotFoundException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, String.format("Contact %s was not fount", contactName));
+        }
+        return ResponseEntity.ok().build();
     }
 }
