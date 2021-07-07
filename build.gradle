@@ -38,7 +38,3 @@ dependencies {
 test {
     useJUnitPlatform()
 }
-test {
-    exclude 'com/gridu/phonebookmvcfinal/apiTest/**'
-}
-
