@@ -22,9 +22,6 @@ public class ContactRestControllerTest {
     private MockMvc mvc;
 
     @Autowired
-    private ContactRepository repository;
-
-    @Autowired
     private ObjectMapper objectMapper;
 
     @Test
