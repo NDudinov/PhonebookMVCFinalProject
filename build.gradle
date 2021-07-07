@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.gridu'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 sourceCompatibility = '11'
 
 configurations {
@@ -31,16 +31,14 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '4.4.0'
-    testImplementation group: 'io.rest-assured', name: 'rest-assured-all', version: '4.4.0'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.2'
-
+    testImplementation group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
 }
 
 test {
     useJUnitPlatform()
 }
 test {
-    exclude 'com/gridu/phonebookmvc/apiTest/**'
+    exclude 'com/gridu/phonebookmvcfinal/apiTest/**'
 }
 

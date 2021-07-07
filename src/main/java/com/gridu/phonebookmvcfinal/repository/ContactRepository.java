@@ -1,9 +1,7 @@
-package com.gridu.phonebookmvc.repository;
+package com.gridu.phonebookmvcfinal.repository;
 
-import com.gridu.phonebookmvc.dto.Contact;
-import com.gridu.phonebookmvc.exception.ContactNotFoundException;
+import com.gridu.phonebookmvcfinal.dto.Contact;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 import java.util.Optional;

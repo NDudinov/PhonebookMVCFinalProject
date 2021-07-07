@@ -1,4 +1,4 @@
-package com.gridu.phonebookmvc;
+package com.gridu.phonebookmvcfinal;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

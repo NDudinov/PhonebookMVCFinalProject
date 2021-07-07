@@ -1,15 +1,13 @@
-package com.gridu.phonebookmvc.service;
+package com.gridu.phonebookmvcfinal.service;
 
-import com.gridu.phonebookmvc.controller.ContactRestController;
-import com.gridu.phonebookmvc.dto.Contact;
-import com.gridu.phonebookmvc.exception.ContactNotFoundException;
-import com.gridu.phonebookmvc.repository.ContactRepository;
+import com.gridu.phonebookmvcfinal.controller.ContactRestController;
+import com.gridu.phonebookmvcfinal.dto.Contact;
+import com.gridu.phonebookmvcfinal.exception.ContactNotFoundException;
+import com.gridu.phonebookmvcfinal.repository.ContactRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 import java.util.List;
 

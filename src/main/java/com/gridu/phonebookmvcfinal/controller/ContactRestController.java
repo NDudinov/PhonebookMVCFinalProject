@@ -1,8 +1,8 @@
-package com.gridu.phonebookmvc.controller;
+package com.gridu.phonebookmvcfinal.controller;
 
-import com.gridu.phonebookmvc.dto.Contact;
-import com.gridu.phonebookmvc.exception.ContactNotFoundException;
-import com.gridu.phonebookmvc.service.ContactService;
+import com.gridu.phonebookmvcfinal.dto.Contact;
+import com.gridu.phonebookmvcfinal.exception.ContactNotFoundException;
+import com.gridu.phonebookmvcfinal.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

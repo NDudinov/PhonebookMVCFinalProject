@@ -1,6 +1,5 @@
-package com.gridu.phonebookmvc;
+package com.gridu.phonebookmvcfinal;
 
-import org.springframework.boot.jdbc.init.DataSourceScriptDatabaseInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@ComponentScan(value = "com.gridu.phonebookmvc")
+@ComponentScan(value = "com.gridu.phonebookmvcfinal")
 public class PhonebookMVCConfig implements WebMvcConfigurer {
 
     @Bean

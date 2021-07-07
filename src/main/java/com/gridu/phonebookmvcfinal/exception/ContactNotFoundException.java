@@ -1,4 +1,4 @@
-package com.gridu.phonebookmvc.exception;
+package com.gridu.phonebookmvcfinal.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

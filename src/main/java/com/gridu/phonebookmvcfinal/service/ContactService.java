@@ -1,7 +1,7 @@
-package com.gridu.phonebookmvc.service;
+package com.gridu.phonebookmvcfinal.service;
 
-import com.gridu.phonebookmvc.dto.Contact;
-import com.gridu.phonebookmvc.exception.ContactNotFoundException;
+import com.gridu.phonebookmvcfinal.dto.Contact;
+import com.gridu.phonebookmvcfinal.exception.ContactNotFoundException;
 
 import java.util.List;
 
